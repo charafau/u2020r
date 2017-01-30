@@ -3,21 +3,22 @@ import {
     AppRegistry,
     StyleSheet,
     Text,
+    Image,
     View,
     ListView
 } from 'react-native';
 
 import * as actions from './../actions/repoActions';
 import {connect} from 'react-redux';
+import {Card, ListItem, Button} from 'react-native-elements'
 
 
 class HomeScreen extends React.Component {
     static navigationOptions = {
-        title: 'Welcome',
+        title: 'Most popular repositories',
     };
 
     componentWillMount() {
-        console.log('mointing home screen');
         this.props.dispatch(actions.fetchRepos())
     }
 
@@ -44,12 +45,29 @@ class HomeScreen extends React.Component {
         console.log(this.props);
         return (
             <View>
-                <Text>Hello, Chat App!</Text>
                 <ListView
                     dataSource={this.state.dataSource}
                     removeClippedSubviews={false}
                     enableEmptySections={true}
-                    renderRow={(rowData) => <Text>{rowData.name}</Text>}
+                    renderRow={(rowData) =>
+
+                        <Card>
+                            <View style={{flex: 1, flexDirection: 'row'}}>
+                                <Image source={{uri: rowData.owner.avatar_url}}
+                                       style={{width: 50, height: 50, borderRadius: 64}}/>
+                                <View style={{flex: 1, flexDirection: 'column', marginLeft: 8}}>
+                                    <Text style={{marginBottom: 10}}>
+                                        {rowData.name}
+                                    </Text>
+                                    <Text style={{marginBottom: 10}}>
+                                        {rowData.description}
+                                    </Text>
+                                </View>
+                            </View>
+
+                        </Card>
+
+                    }
                 />
             </View>
         );

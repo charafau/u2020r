@@ -16,7 +16,18 @@ import {connect} from 'react-redux';
 import HomeScreen from './src/componenets/homeScreen'
 
 const SimpleApp = StackNavigator({
-    Home: {screen: HomeScreen},
+    Home: {
+        screen: HomeScreen,
+        //this should work after this is fixed:
+        // https://github.com/react-community/react-navigation/issues/83
+        // navigationOptions: {
+        //     header: {
+        //         style: {
+        //             backgroundColor: '#F00',
+        //         },
+        //     },
+        // },
+    },
 
 });
 
